@@ -355,6 +355,7 @@ class phpMQTT
         $head = chr(0xc0);
         $head .= chr(0x00);
         fwrite($this->socket, $head, 2);
+        $this->read(2, false);  //process PINGRESP, otherwise proc() stops in php 8.4
         $this->timesinceping = time();
         $this->_debugMessage('ping sent');
     }
